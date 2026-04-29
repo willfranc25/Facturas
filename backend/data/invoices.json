@@ -1,0 +1,29 @@
+[
+  {
+    "providerName": "SERVIJUANAL SPA",
+    "providerRut": "76.050.317-1",
+    "documentType": "boleta_electronica",
+    "documentNumber": "",
+    "date": "2023-07-17",
+    "time": "17:53",
+    "category": "Combustible",
+    "items": [
+      {
+        "description": "bencina 95 octanos",
+        "quantity": 10,
+        "unitPrice": 3.5385,
+        "total": 35.385
+      }
+    ],
+    "netAmount": 20948,
+    "ivaAmount": 3980,
+    "exemptAmount": 0,
+    "otherTaxes": 10457,
+    "totalAmount": 35385,
+    "paymentMethod": "efectivo",
+    "status": "reviewed",
+    "id": "69f44ec3-dbe6-4140-a13d-8fcaeafab4d1",
+    "createdAt": "2026-04-28T19:40:36.662Z",
+    "updatedAt": "2026-04-28T19:40:36.662Z"
+  }
+]

@@ -1,0 +1,257 @@
+Quiero que actúes como arquitecto senior full-stack y me crees desde cero un proyecto completo en React para gestionar facturas/boletas y llevar control de gastos para declaración de impuestos.
+
+OBJETIVO DEL SISTEMA
+Crear una aplicación web completa para:
+1. Subir fotos de facturas o boletas.
+2. Guardar la imagen original del comprobante.
+3. Extraer datos usando OCR.
+4. Permitir revisar y corregir manualmente los datos extraídos.
+5. Registrar cada gasto contablemente.
+6. Agrupar gastos por tipo/categoría.
+7. Sumar valores automáticamente.
+8. Ver reportes mensuales.
+9. Exportar datos a Excel/CSV.
+10. Preparar un resumen útil para declaración de impuestos.
+
+STACK TECNOLÓGICO
+Usar:
+- React + Vite
+- TypeScript
+- TailwindCSS
+- Zustand para estado global
+- React Hook Form
+- Zod para validaciones
+- Recharts para gráficos
+- Tesseract.js para OCR en frontend
+- xlsx para exportar Excel
+- uuid para IDs
+- localStorage o IndexedDB para persistencia inicial
+- Diseño responsive para PC y celular
+
+ESTRUCTURA DEL PROYECTO
+Crear esta estructura:
+
+src/
+  components/
+    layout/
+    invoices/
+    dashboard/
+    reports/
+    ui/
+  pages/
+    DashboardPage.tsx
+    UploadInvoicePage.tsx
+    InvoicesPage.tsx
+    InvoiceDetailPage.tsx
+    ReportsPage.tsx
+    SettingsPage.tsx
+  services/
+    ocrService.ts
+    invoiceParser.ts
+    exportService.ts
+    storageService.ts
+  store/
+    invoiceStore.ts
+  types/
+    invoice.ts
+  data/
+    categories.ts
+  utils/
+    formatters.ts
+    calculations.ts
+  App.tsx
+  main.tsx
+
+MODELO DE DATOS
+Crear tipos TypeScript para:
+
+Invoice:
+- id
+- providerName
+- providerRut
+- documentType
+- documentNumber
+- date
+- time
+- category
+- items
+- netAmount
+- ivaAmount
+- exemptAmount
+- otherTaxes
+- totalAmount
+- paymentMethod
+- imageUrl
+- rawOcrText
+- status: pending | reviewed | approved
+- notes
+- createdAt
+- updatedAt
+
+InvoiceItem:
+- id
+- description
+- quantity
+- unitPrice
+- total
+
+Categorías iniciales:
+- Supermercado
+- Combustible
+- Transporte
+- Servicios básicos
+- Arriendo
+- Comida
+- Insumos de trabajo
+- Equipamiento
+- Marketing
+- Internet / Telefonía
+- Otros
+
+FUNCIONALIDADES PRINCIPALES
+
+1. Dashboard
+Crear una pantalla principal con:
+- Total gastado del mes.
+- Total IVA del mes.
+- Total neto del mes.
+- Cantidad de comprobantes.
+- Gráfico de gastos por categoría.
+- Gráfico de gastos por mes.
+- Últimas facturas cargadas.
+
+2. Carga de factura
+Crear pantalla para:
+- Subir imagen.
+- Mostrar preview.
+- Ejecutar OCR con Tesseract.js.
+- Mostrar progreso del OCR.
+- Mostrar texto extraído.
+- Pasar el texto extraído al parser.
+
+3. Parser de facturas
+Crear una función que intente detectar automáticamente:
+- RUT proveedor.
+- Nombre proveedor.
+- Número de boleta/factura.
+- Fecha.
+- Hora.
+- Monto neto.
+- IVA.
+- Monto exento.
+- Total.
+- Método de pago.
+
+Debe funcionar con boletas chilenas similares a:
+- Cencosud Retail S.A.
+- Servivual SPA / combustible
+- Boleta electrónica
+- Factura electrónica
+
+Usar expresiones regulares y lógica flexible, porque el OCR puede tener errores.
+
+4. Revisión manual
+Después del OCR, mostrar un formulario editable donde pueda corregir:
+- proveedor
+- RUT
+- número documento
+- fecha
+- categoría
+- neto
+- IVA
+- total
+- método de pago
+- notas
+
+5. Lista de comprobantes
+Crear tabla con:
+- Fecha
+- Proveedor
+- Categoría
+- Neto
+- IVA
+- Total
+- Estado
+- Botones para ver, editar y eliminar
+
+Debe tener filtros por:
+- mes
+- año
+- categoría
+- proveedor
+- estado
+
+6. Detalle de comprobante
+Mostrar:
+- Imagen original.
+- Datos contables.
+- Texto OCR original.
+- Items detectados.
+- Historial básico de creación/edición.
+
+7. Reportes
+Crear pantalla para:
+- Total por mes.
+- Total por categoría.
+- Total IVA.
+- Total neto.
+- Total general.
+- Exportar Excel.
+- Exportar CSV.
+
+8. Exportación
+Crear exportService.ts para exportar:
+- Excel con todos los comprobantes.
+- CSV simple.
+- Resumen mensual.
+- Resumen por categoría.
+
+9. Persistencia
+Para la primera versión usar localStorage o IndexedDB.
+Preferiblemente IndexedDB para poder guardar imágenes.
+Crear storageService.ts que permita:
+- guardar facturas
+- editar facturas
+- eliminar facturas
+- obtener todas
+- buscar por ID
+
+DISEÑO UI
+Quiero un diseño profesional, moderno y limpio:
+- Sidebar lateral.
+- Tarjetas de resumen.
+- Tablas claras.
+- Botones visibles.
+- Colores sobrios.
+- Responsive para móvil.
+- Formularios fáciles de usar.
+- Estados visuales: pendiente, revisado, aprobado.
+
+REGLAS IMPORTANTES
+- El OCR puede fallar, por eso siempre debe existir edición manual.
+- El sistema debe detectar posibles duplicados por proveedor + número de documento + total.
+- El sistema debe validar que el total coincida aproximadamente con neto + IVA + otros impuestos.
+- El código debe estar modularizado.
+- No quiero todo en un solo archivo.
+- Usar buenas prácticas.
+- Agregar comentarios donde sea necesario.
+- Crear componentes reutilizables.
+- Evitar dependencias innecesarias.
+
+ENTREGABLES
+Quiero que generes:
+1. Proyecto completo funcional.
+2. Instalación de dependencias.
+3. Estructura de carpetas.
+4. Código de todos los archivos necesarios.
+5. Instrucciones para correrlo:
+   npm install
+   npm run dev
+6. Datos de prueba para comprobar el dashboard.
+7. README.md explicando cómo usar el sistema.
+
+PRIMERA VERSIÓN ESPERADA
+No necesito conexión a backend todavía.
+Quiero una versión local funcional, donde pueda subir facturas, extraer datos, corregirlos, guardarlos, ver reportes y exportar Excel.
+
+Cuando termines, revisa el proyecto y corrige errores de TypeScript, imports, rutas y dependencias.

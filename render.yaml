@@ -1,0 +1,27 @@
+# render.yaml — Render.com deployment configuration
+# https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: invoice-expense-manager-api
+    env: node
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_WEBHOOK_URL
+        sync: false
+      - key: TELEGRAM_ALLOWED_USER_IDS
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
+      - key: VLM_MODE
+        value: local
