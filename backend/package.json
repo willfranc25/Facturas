@@ -19,9 +19,6 @@
     "tesseract.js": "^5.1.1",
     "uuid": "^10.0.0"
   },
-  "optionalDependencies": {
-    "@esbuild/win32-x64": "^0.28.0"
-  },
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
