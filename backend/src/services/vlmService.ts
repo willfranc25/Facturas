@@ -158,14 +158,32 @@ export class VLMService {
         );
         rawResponse = response.data.response as string;
       } else {
+        // Groq / OpenAI-compatible vision API
         const response = await axios.post(
           config.vlm.remoteUrl,
-          { prompt: EXTRACTION_PROMPT, image: base64Image },
-          { timeout: config.vlm.timeoutMs }
+          {
+            model: config.vlm.remoteModel || 'meta-llama/llama-4-scout-17b-16e-instruct',
+            messages: [
+              {
+                role: 'user',
+                content: [
+                  { type: 'text', text: EXTRACTION_PROMPT },
+                  { type: 'image_url', image_url: { url: `data:image/jpeg;base64,${base64Image}` } },
+                ],
+              },
+            ],
+            temperature: 0.1,
+            max_tokens: 1024,
+          },
+          {
+            timeout: config.vlm.timeoutMs,
+            headers: {
+              'Authorization': `Bearer ${config.vlm.remoteApiKey}`,
+              'Content-Type': 'application/json',
+            },
+          }
         );
-        rawResponse = typeof response.data === 'string'
-          ? response.data
-          : JSON.stringify(response.data);
+        rawResponse = response.data.choices?.[0]?.message?.content as string ?? '';
       }
 
       const parsed = tryParseJson(rawResponse);
