@@ -131,11 +131,11 @@ function extractDocumentType(text: string): DocumentType | undefined {
 
 function extractPaymentMethod(text: string): PaymentMethod | undefined {
   const upper = text.toUpperCase();
-  // RED COMPRA = tarjeta de débito
-  if (upper.includes('RED COMPRA') || upper.includes('REDCOMPRA')) return 'débito';
+  // RED COMPRA = tarjeta de debito
+  if (upper.includes('RED COMPRA') || upper.includes('REDCOMPRA')) return 'debito';
   if (upper.includes('EFECTIVO')) return 'efectivo';
-  if (upper.includes('DEBITO') || upper.includes('DÉBITO')) return 'débito';
-  if (upper.includes('CREDITO') || upper.includes('CRÉDITO')) return 'crédito';
+  if (upper.includes('DEBITO') || upper.includes('DÉBITO')) return 'debito';
+  if (upper.includes('CREDITO') || upper.includes('CRÉDITO')) return 'credito';
   if (upper.includes('TRANSFERENCIA')) return 'transferencia';
   return undefined;
 }

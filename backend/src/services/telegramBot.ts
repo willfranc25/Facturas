@@ -312,7 +312,7 @@ for (const cat of CATEGORIES) {
 }
 
 // Payment method callbacks
-const PAYMENT_METHODS: PaymentMethod[] = ['efectivo', 'débito', 'crédito', 'transferencia', 'otro'];
+const PAYMENT_METHODS: PaymentMethod[] = ['efectivo', 'debito', 'credito', 'transferencia', 'otro'];
 
 for (const method of PAYMENT_METHODS) {
   bot.action(`pay_${method}`, async (ctx) => {
