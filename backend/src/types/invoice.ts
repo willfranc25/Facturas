@@ -10,8 +10,8 @@ export type DocumentType =
 
 export type PaymentMethod =
   | 'efectivo'
-  | 'débito'
-  | 'crédito'
+  | 'debito'
+  | 'credito'
   | 'transferencia'
   | 'otro';
 
